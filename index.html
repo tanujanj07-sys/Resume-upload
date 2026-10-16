@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Resume Analyzer & Job Recommender</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">AI Resume Analyzer</div>
+    <nav>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#upload">Upload Resume</a>
+      <a href="#jobs">Jobs</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Upload Section -->
+    <section id="upload" class="card">
+      <h2>Upload Your Resume</h2>
+      <p>Supported formats: PDF, DOCX (max 5 MB)</p>
+
+      <div class="upload-area" id="dropZone">
+        <div class="upload-icon">📄</div>
+        <div class="upload-text">
+          <strong>Drag & drop</strong> your resume here<br />
+          or
+        </div>
+        <label class="file-btn">
+          Choose File
+          <input type="file" id="resumeFile" accept=".pdf,.docx" hidden />
+        </label>
+        <div id="fileName" class="file-name"></div>
+      </div>
+
+      <div class="form-row">
+        <label>
+          Target Job Role
+          <select id="targetRole">
+            <option value="frontend">Frontend Developer</option>
+            <option value="backend">Backend Developer</option>
+            <option value="fullstack">Full Stack Developer</option>
+            <option value="data">Data Analyst</option>
+            <option value="ml">Machine Learning Engineer</option>
+          </select>
+        </label>
+      </div>
+
+      <button id="analyzeBtn" class="primary-btn">Analyze Resume</button>
+      <div id="uploadError" class="error-msg"></div>
+    </section>
+
+    <!-- Dashboard / Analysis Section -->
+    <section id="dashboard" class="card hidden">
+      <h2>Dashboard</h2>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Resume Score</div>
+          <div class="stat-value" id="resumeScore">--</div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="scoreFill"></div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Skills Found</div>
+          <div class="stat-value" id="skillsCount">--</div>
+          <div class="stat-sub" id="skillsListPreview"></div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Matched Jobs</div>
+          <div class="stat-value" id="matchedJobsCount">--</div>
+          <div class="stat-sub">Based on your profile</div>
+        </div>
+      </div>
+
+      <div class="analysis-grid">
+        <!-- Extracted Skills -->
+        <div class="panel">
+          <h3>Extracted Skills</h3>
+          <div id="extractedSkills" class="skills-cloud"></div>
+        </div>
+
+        <!-- Missing Skills -->
+        <div class="panel">
+          <h3>Missing Skills (for <span id="missingRoleLabel">selected role</span>)</h3>
+          <div id="missingSkills" class="missing-skills"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Job Recommendations -->
+    <section id="jobs" class="card hidden">
+      <h2>Job Recommendations</h2>
+      <p class="section-desc">
+        Jobs matched to your skills and selected role.
+      </p>
+      <div id="jobsList" class="jobs-grid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>AI Resume Analyzer & Job Recommendation System (Demo)</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
